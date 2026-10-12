@@ -14,6 +14,7 @@ from norway_company_agent.batch import profile_complete_for_modules, profiles_fr
 from norway_company_agent.evidence import utc_now  # noqa: E402
 from norway_company_agent.identity import apply_website_identity_gate  # noqa: E402
 from norway_company_agent.official import fetch_official_modules  # noqa: E402
+from norway_company_agent.output_contract import build_contract_envelopes, validate_contract_envelopes  # noqa: E402
 from norway_company_agent.website import fetch_website  # noqa: E402
 
 
@@ -104,8 +105,11 @@ def main() -> None:
         for profile in ordered_profiles
     ]
     validation = validate_envelopes(envelopes, args.expected_count)
+    run_meta = {"run_id": args.run_id, "started_at": started_at, "completed_at": completed_at}
+    contract_envelopes = build_contract_envelopes(ordered_profiles, run_meta, modules=requested_modules)
+    contract_validation = validate_contract_envelopes(contract_envelopes, args.expected_count)
     write_jsonl(profiles_output, ordered_profiles)
-    write_jsonl(Path(args.output), envelopes)
+    write_jsonl(Path(args.output), contract_envelopes)
     latencies = sorted(operations.pop("latencies_ms"))
     operations["p50_ms"] = latencies[len(latencies) // 2] if latencies else None
     operations["p95_ms"] = latencies[min(len(latencies) - 1, int(len(latencies) * 0.95))] if latencies else None
@@ -114,18 +118,19 @@ def main() -> None:
         "started_at": started_at,
         "completed_at": completed_at,
         "expected_count": args.expected_count,
-        "emitted_envelopes": len(envelopes),
+        "emitted_envelopes": len(contract_envelopes),
         "resumed_profiles": resumed_profiles,
         "profiles_fetched_this_run": len(pending_profiles),
         "modules": requested_modules,
         "registry": registry_metadata,
         "operations": operations,
         "validation": validation,
+        "contract_validation": contract_validation,
     }
     Path(args.report).parent.mkdir(parents=True, exist_ok=True)
     Path(args.report).write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    raise SystemExit(0 if validation["passed"] else 1)
+    raise SystemExit(0 if (validation["passed"] and contract_validation["passed"]) else 1)
 
 
 if __name__ == "__main__":

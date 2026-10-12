@@ -1,13 +1,13 @@
 Project name: SignalPost Agent
-Repository URL: 
-Exact commit hash: 478730e
-One-line run command: python scripts/run_competition_batch.py --organisations smoke-companies.jsonl --bulk brreg-enheter.csv.gz --profiles-output out/profiles.jsonl --output out/envelopes.jsonl --report out/run-report.json --run-id run-001 --expected-count 100
-Python/runtime version: 3.12.10
-Dependency lock file name: pyproject.toml
-Models and versions: None required for baseline
-APIs/sources used: Brreg registry (data.brreg.no), official sources
-Licence/source-policy notes: See docs/source_policy.md
-Expected cost per official run: .00
+Repository URL: https://github.com/rohithsuresh21/BuilderAI-signalpost-Hackathon
+Exact commit hash: recorded in the post-commit release manifest (Downloads/SignalPost_Submission/release_manifest.md). A commit cannot name its own hash; the hash is written after the release commit is created.
+One-line run command: python scripts/run_competition_batch.py --organisations <100-company-input.jsonl> --bulk <brreg-enheter.csv.gz> --output out/envelopes.jsonl --profiles-output out/profiles.jsonl --report out/run-report.json --run-id run-001 --expected-count 100
+Python/runtime version: 3.12.10 (requires-python >=3.12)
+Dependency lock file name: requirements.lock.txt (pip freeze of the core install in Python 3.12.10)
+Models and versions: None required for the core pipeline (no third-party LLM or paid API)
+APIs/sources used: Brreg Enhetsregisteret and Regnskapsregisteret (data.brreg.no, keyless public API), plus registry-listed company websites (robots.txt honoured)
+Licence/source-policy notes: No project LICENSE has been chosen (manual decision required). Source/outbound policy in docs/source_policy.md. Third-party dependency licences are pinned in requirements.lock.txt but not individually declared.
+Expected cost per official run: 0.00 USD in third-party API charges (public Brreg API is keyless; compute cost is not zero and is not part of this figure)
 Contact details: [To be filled by user]
-Smoke-test report path: reports/smoke-test-report.json
-Known limitations: Requires Brreg bulk data file and company universe as per starter
+Smoke-test report path: reports/smoke-test-report.json and the downloadable 100-company report in the submission bundle
+Known limitations: Requires the frozen Brreg bulk snapshot; the official input batch is supplied by Builderr and was not used for local runs
