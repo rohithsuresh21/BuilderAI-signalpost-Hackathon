@@ -44,3 +44,12 @@ out/
 cache/
 logs/
 raw/
+
+# macOS AppleDouble metadata (from tar extraction)
+._*
+
+# Local datasets & generated run inputs (never commit)
+signalpost-starter-kit/
+smoke-companies*.jsonl
+smoke100.jsonl
+heldout*.jsonl
