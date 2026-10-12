@@ -1,13 +1,13 @@
 Project name: SignalPost Agent
 Repository URL: 
-Exact commit hash: b275c04
+Exact commit hash: 478730e
 One-line run command: python scripts/run_competition_batch.py --organisations smoke-companies.jsonl --bulk brreg-enheter.csv.gz --profiles-output out/profiles.jsonl --output out/envelopes.jsonl --report out/run-report.json --run-id run-001 --expected-count 100
-Python/runtime version: 3.12
+Python/runtime version: 3.12.10
 Dependency lock file name: pyproject.toml
-Models and versions: N/A
-APIs/sources used: Brreg registry, official sources as implemented
+Models and versions: None required for baseline
+APIs/sources used: Brreg registry (data.brreg.no), official sources
 Licence/source-policy notes: See docs/source_policy.md
-Expected cost per official run:  - no paid external APIs required for baseline
+Expected cost per official run: .00
 Contact details: [To be filled by user]
 Smoke-test report path: reports/smoke-test-report.json
-Known limitations: Starter baseline - requires Brreg bulk data
+Known limitations: Requires Brreg bulk data file and company universe as per starter
