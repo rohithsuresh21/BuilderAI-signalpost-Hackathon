@@ -6,8 +6,8 @@ Python/runtime version: 3.12.10 (requires-python >=3.12)
 Dependency lock file name: requirements.lock.txt (pip freeze of the core install in Python 3.12.10)
 Models and versions: None required for the core pipeline (no third-party LLM or paid API)
 APIs/sources used: Brreg Enhetsregisteret and Regnskapsregisteret (data.brreg.no, keyless public API), plus registry-listed company websites (robots.txt honoured)
-Licence/source-policy notes: No project LICENSE has been chosen (manual decision required). Source/outbound policy in docs/source_policy.md. Third-party dependency licences are pinned in requirements.lock.txt but not individually declared.
+Licence/source-policy notes: Project is MIT-licensed (see LICENSE). Source/outbound policy in docs/source_policy.md. Third-party dependency versions are pinned in requirements.lock.txt; their individual licences have not been audited.
 Expected cost per official run: 0.00 USD in third-party API charges (public Brreg API is keyless; compute cost is not zero and is not part of this figure)
-Contact details: [To be filled by user]
+Contact details: rohithsuresh2107@gmail.com
 Smoke-test report path: reports/smoke-test-report.json and the downloadable 100-company report in the submission bundle
 Known limitations: Requires the frozen Brreg bulk snapshot; the official input batch is supplied by Builderr and was not used for local runs
